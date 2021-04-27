@@ -1,0 +1,27 @@
+version: '3'
+
+networks:
+    app-tier:
+        driver: bridge
+
+services: 
+    erlang.cluster.k8s-1:
+        image: 'docker.globalwavenet.com/erlang.cluster.k8s:latest'
+        build: .
+        networks:
+            - app-tier
+        environment:
+           - NODE_NAME='erlang_cluster_k8s@erlang.cluster.k8s-1'
+           - COOKIE='erlang.cluster.k8s'
+           - HEADLESS_SVC=[]
+           - WORLD_LIST=['erlang.cluster.k8s-1', 'erlang.cluster.k8s-2']
+
+    erlang.cluster.k8s-2:
+        image: 'docker.globalwavenet.com/erlang.cluster.k8s:latest'
+        networks:
+            - app-tier
+        environment:
+           - NODE_NAME='erlang_cluster_k8s@erlang.cluster.k8s-2'
+           - COOKIE='erlang.cluster.k8s'
+           - HEADLESS_SVC=[]
+           - WORLD_LIST=['erlang.cluster.k8s-1', 'erlang.cluster.k8s-2']

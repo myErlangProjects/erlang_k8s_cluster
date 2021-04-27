@@ -1,0 +1,9 @@
+[
+  {erlang_cluster_k8s, 
+  [{'k8s.svc.path', ${HEADLESS_SVC}},
+   {'world.list.verbosity', verbose},
+   {'world.list.verbosity', 5000},
+   {'dns.wait.ms', 5000},
+   {'world.list', ${WORLD_LIST}}
+]}
+].
