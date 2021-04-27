@@ -29,7 +29,10 @@ init([]) ->
     SupFlags = #{strategy => one_for_all,
                  intensity => 0,
                  period => 1},
-    ChildSpecs = [],
+    ChildSpecs = [{erlang_cluster_k8s_svr,
+                    {gen_server, start_link,[{local,erlang_cluster_k8s_svr},erlang_cluster_k8s_svr,[[]],[]]},
+                    permanent, 10000, worker, [erlang_cluster_k8s_svr]
+                 }],
     {ok, {SupFlags, ChildSpecs}}.
 
 %% internal functions
