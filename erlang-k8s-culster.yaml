@@ -44,7 +44,7 @@ spec:
       containers:
       - name: erlang-k8s-node
         image: 'contactchanaka/erlang.k8s.cluster:0.0.1'
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent # can be set to Always
         ports:
         - containerPort: 4369
           name: epmd
