@@ -1,0 +1,74 @@
+  
+apiVersion: v1
+kind: Secret
+metadata:
+  name: erlang-k8s-secret
+type: Opaque
+data:
+  # echo -n "cookie-value" | base64
+  ERLANG_COOKIE: ZXJsYW5nLmNsdXN0ZXIuazhz
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: erlang-k8s-service
+  labels:
+    app: erlang
+spec:
+  ports:
+  - port: 4369
+    name: epmd
+  clusterIP: None
+  selector:
+    app: erlang
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: erlang-k8s-cluster
+  labels:
+    app: erlang
+spec:
+  selector:
+    matchLabels:
+      app: erlang # has to match .spec.template.metadata.labels
+  serviceName: "erlang-k8s-service"
+  replicas: 2 # by default is 1
+  template:
+    metadata:
+      labels:
+        app: erlang # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+      - name: erlang-k8s-node
+        image: 'contactchanaka/erlang.k8s.cluster:0.0.1'
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 4369
+          name: epmd
+        env:
+        - name: ERLANG_POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: ERLANG_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: K8S_HOSTNAME_SUFFIX
+          value: '"erlang-k8s-service.$(ERLANG_POD_NAMESPACE).svc.cluster.local"'
+        - name: ERLANG_NODENAME
+          value: erlang-k8s@$(ERLANG_POD_NAME).$(K8S_HOSTNAME_SUFFIX)
+        - name: ERLANG_USE_LONGNAME 
+          value: "true"
+        - name: CLUSTER_ERLANG_COOKIE
+          valueFrom:
+            secretKeyRef:
+              name: erlang-k8s-secret
+              key: ERLANG_COOKIE
+        - name: WORLD_LIST
+          value: "[]"
+      restartPolicy: Always

@@ -5,23 +5,23 @@ networks:
         driver: bridge
 
 services: 
-    erlang.cluster.k8s-1:
-        image: 'docker.globalwavenet.com/erlang.cluster.k8s:latest'
+    erlang.k8s.cluster-1:
+        image: 'contactchanaka/erlang.k8s.cluster:0.0.1'
         build: .
         networks:
             - app-tier
         environment:
-           - NODE_NAME='erlang_cluster_k8s@erlang.cluster.k8s-1'
-           - COOKIE='erlang.cluster.k8s'
-           - HEADLESS_SVC=[]
-           - WORLD_LIST=['erlang.cluster.k8s-1', 'erlang.cluster.k8s-2']
+           - ERLANG_NODENAME='erlang_k8s@erlang.k8s.cluster-1'
+           - CLUSTER_ERLANG_COOKIE='erlang.k8s.cluster'
+           - K8S_HOSTNAME_SUFFIX=[]
+           - WORLD_LIST=['erlang.k8s.cluster-1', 'erlang.k8s.cluster-2']
 
-    erlang.cluster.k8s-2:
-        image: 'docker.globalwavenet.com/erlang.cluster.k8s:latest'
+    erlang.k8s.cluster-2:
+        image: 'contactchanaka/erlang.k8s.cluster:0.0.1'
         networks:
             - app-tier
         environment:
-           - NODE_NAME='erlang_cluster_k8s@erlang.cluster.k8s-2'
-           - COOKIE='erlang.cluster.k8s'
-           - HEADLESS_SVC=[]
-           - WORLD_LIST=['erlang.cluster.k8s-1', 'erlang.cluster.k8s-2']
+           - ERLANG_NODENAME='erlang_k8s@erlang.k8s.cluster-2'
+           - CLUSTER_ERLANG_COOKIE='erlang.k8s.cluster'
+           - K8S_HOSTNAME_SUFFIX=[]
+           - WORLD_LIST=['erlang.k8s.cluster-1', 'erlang.k8s.cluster-2']

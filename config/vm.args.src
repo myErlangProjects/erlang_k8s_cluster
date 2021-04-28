@@ -1,6 +1,6 @@
--name ${NODE_NAME} 
+-name ${ERLANG_NODENAME} 
 
--setcookie ${COOKIE}
+-setcookie ${CLUSTER_ERLANG_COOKIE}
 
 +K true
 +A30

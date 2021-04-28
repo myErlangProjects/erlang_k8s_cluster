@@ -56,7 +56,7 @@ handle_info({timeout, TimerRef, world_list},
             'world.list.tref' = TimerRef, 'world.list.interval.ms' = WorldListMs, 'dns.wait.ms' = DnsWaitMs} = State) ->
     case catch inet_res:getbyname(K8sServicePath, srv, DnsWaitMs) of
         {ok,{hostent,K8sServicePath,[], srv, _Count, AddressList}} ->
-            Hostlist = [Host || {_,_,_, Host} <- AddressList],
+            Hostlist = [string_to_atom(Host) || {_,_,_, Host} <- AddressList],
             net_adm:world_list(Hostlist, WLVerbosity);
         DnsError ->
             error_logger:format("inet_res:getbyname - ~p ~n~n ~p", [K8sServicePath, DnsError])
@@ -72,3 +72,15 @@ terminate(_Reason, _State) ->
 
 code_change(_OldVsn, State, _Extra) ->
     {ok, State}.
+
+%%----------------------------------------------------------------------
+%%  internal functions
+%%----------------------------------------------------------------------
+%% @hidden
+string_to_atom(String) ->
+case catch erlang:list_to_existing_atom(String) of
+    {'EXIT', _ } ->
+        erlang:list_to_atom(String);
+    Atom ->
+        Atom
+end.
