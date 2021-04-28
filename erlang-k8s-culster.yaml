@@ -62,8 +62,6 @@ spec:
           value: '"erlang-k8s-service.$(ERLANG_POD_NAMESPACE).svc.cluster.local"'
         - name: ERLANG_NODENAME
           value: erlang-k8s@$(ERLANG_POD_NAME).$(K8S_HOSTNAME_SUFFIX)
-        - name: ERLANG_USE_LONGNAME 
-          value: "true"
         - name: CLUSTER_ERLANG_COOKIE
           valueFrom:
             secretKeyRef:
