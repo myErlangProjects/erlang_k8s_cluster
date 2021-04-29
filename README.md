@@ -23,7 +23,7 @@ docker-compose build
 
 ## Running application
 
-## Local release
+### Local release
 Declare required `env vars`
 ```
 export ERLANG_NODENAME=erlang_cluster_k8s@host.name
@@ -40,7 +40,7 @@ Clear
 Ctrl+c
 ```
 
-## Docker compose
+### Docker compose
 ```
 docker-compose up
 ```
@@ -49,7 +49,7 @@ Clear out
 docker-compose down
 ```
 
-## K8s
+### K8s
 Change working directory 
 `cd k8s/manifests`
 ```
