@@ -1,9 +1,9 @@
 %%%-------------------------------------------------------------------
-%% @doc erlang_cluster_k8s top level supervisor.
+%% @doc erlang_k8s_cluster top level supervisor.
 %% @end
 %%%-------------------------------------------------------------------
 
--module(erlang_cluster_k8s_sup).
+-module(erlang_k8s_cluster_sup).
 
 -behaviour(supervisor).
 
@@ -29,9 +29,9 @@ init([]) ->
     SupFlags = #{strategy => one_for_all,
                  intensity => 0,
                  period => 1},
-    ChildSpecs = [{erlang_cluster_k8s_svr,
-                    {gen_server, start_link,[{local,erlang_cluster_k8s_svr},erlang_cluster_k8s_svr,[[]],[]]},
-                    permanent, 10000, worker, [erlang_cluster_k8s_svr]
+    ChildSpecs = [{erlang_k8s_cluster_svr,
+                    {gen_server, start_link,[{local,erlang_k8s_cluster_svr}, erlang_k8s_cluster_svr,[[]],[]]},
+                    permanent, 10000, worker, [erlang_k8s_cluster_svr]
                  }],
     {ok, {SupFlags, ChildSpecs}}.
 

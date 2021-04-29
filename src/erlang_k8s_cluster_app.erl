@@ -1,16 +1,16 @@
 %%%-------------------------------------------------------------------
-%% @doc erlang_cluster_k8s public API
+%% @doc erlang_k8s_cluster public API
 %% @end
 %%%-------------------------------------------------------------------
 
--module(erlang_cluster_k8s_app).
+-module(erlang_k8s_cluster_app).
 
 -behaviour(application).
 
 -export([start/2, stop/1]).
 
 start(_StartType, _StartArgs) ->
-    erlang_cluster_k8s_sup:start_link().
+    erlang_k8s_cluster_sup:start_link().
 
 stop(_State) ->
     ok.

@@ -1,8 +1,8 @@
-{application, erlang_cluster_k8s,
+{application, erlang_k8s_cluster,
  [{description, "An OTP application"},
   {vsn, "0.1.0"},
   {registered, []},
-  {mod, {erlang_cluster_k8s_app, []}},
+  {mod, {erlang_k8s_cluster_app, []}},
   {applications,
    [kernel,
     stdlib
