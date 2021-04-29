@@ -35,16 +35,27 @@ Run
 ```
 ./_build/default/rel/erlang_k8s_cluster/bin/erlang_k8s_cluster console
 ```
+Clear
+```
+Ctrl+c
+```
 
 ## Docker compose
 ```
 docker-compose up
 ```
+Clear out
+```
+docker-compose down
+```
 
 ## K8s
 Change working directory 
 `cd k8s/manifests`
-
 ```
 kubectl apply -f erlang-k8s-cluster.yaml
+```
+Clear out
+```
+kubectl delete -f erlang-k8s-culster.yaml
 ```
