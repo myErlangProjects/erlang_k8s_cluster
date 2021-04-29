@@ -44,7 +44,7 @@ spec:
       containers:
       - name: erlang-k8s-node
         image: 'contactchanaka/erlang.k8s.cluster:0.0.1'
-        imagePullPolicy: IfNotPresent # can be set to Always
+        imagePullPolicy: Always # can be set to IfNotPresent
         ports:
         - containerPort: 4369
           name: epmd
@@ -58,10 +58,10 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-        - name: K8S_HOSTNAME_SUFFIX
+        - name: K8S_HEADLESS_SVC
           value: '"erlang-k8s-service.$(ERLANG_POD_NAMESPACE).svc.cluster.local"'
         - name: ERLANG_NODENAME
-          value: erlang-k8s@$(ERLANG_POD_NAME).$(K8S_HOSTNAME_SUFFIX)
+          value: erlang-k8s@$(ERLANG_POD_NAME).erlang-k8s-service.$(ERLANG_POD_NAMESPACE).svc.cluster.local
         - name: CLUSTER_ERLANG_COOKIE
           valueFrom:
             secretKeyRef:

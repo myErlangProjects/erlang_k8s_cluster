@@ -13,7 +13,7 @@ services:
         environment:
            - ERLANG_NODENAME='erlang_k8s@erlang.k8s.cluster-1'
            - CLUSTER_ERLANG_COOKIE='erlang.k8s.cluster'
-           - K8S_HOSTNAME_SUFFIX=[]
+           - K8S_HEADLESS_SVC=[]
            - WORLD_LIST=['erlang.k8s.cluster-1', 'erlang.k8s.cluster-2']
 
     erlang.k8s.cluster-2:
@@ -23,5 +23,5 @@ services:
         environment:
            - ERLANG_NODENAME='erlang_k8s@erlang.k8s.cluster-2'
            - CLUSTER_ERLANG_COOKIE='erlang.k8s.cluster'
-           - K8S_HOSTNAME_SUFFIX=[]
+           - K8S_HEADLESS_SVC=[]
            - WORLD_LIST=['erlang.k8s.cluster-1', 'erlang.k8s.cluster-2']

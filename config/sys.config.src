@@ -1,6 +1,6 @@
 [
   {erlang_cluster_k8s, 
-  [{'k8s.svc.path', ${K8S_HOSTNAME_SUFFIX}},
+  [{'k8s.svc.path', ${K8S_HEADLESS_SVC}},
    {'world.list.verbosity', verbose},
    {'world.list.interval.ms', 5000},
    {'dns.wait.ms', 5000},
