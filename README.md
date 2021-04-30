@@ -42,7 +42,7 @@ Ctrl+c
 
 ### Docker compose
 ```
-docker-compose up
+docker-compose up -d
 ```
 Clear out
 ```
