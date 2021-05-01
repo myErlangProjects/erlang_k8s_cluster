@@ -16,12 +16,13 @@ metadata:
   labels:
     app: erlang
 spec:
-  ports:
-  - port: 4369
-    name: epmd
+  type: ClusterIP
   clusterIP: None
   selector:
     app: erlang
+  ports:
+  - port: 4369
+    name: epmd
 ---
 apiVersion: apps/v1
 kind: StatefulSet
