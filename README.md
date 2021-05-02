@@ -1,5 +1,6 @@
 # erlang_k8s_cluster
 Automatic Erlang based cluster creation in k8s
+For more information please refer [Erlang cluster peer discovery on Kubernetes](https://contactchanaka.medium.com/erlang-cluster-peer-discovery-on-kubernetes-aa2ed15663f9)
 
 ## Packaging application
 
