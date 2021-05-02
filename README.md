@@ -2,6 +2,38 @@
 Automatic Erlang peer discovery on k8s. This application can be started with your main erlang application with required configuration to established discovery among peers. 
 For more information please refer [Erlang cluster peer discovery on Kubernetes](https://contactchanaka.medium.com/erlang-cluster-peer-discovery-on-kubernetes-aa2ed15663f9)
 
+## configurations
+
+```
+# vm.args 
+-name ${ERLANG_NODENAME} 
+
+-setcookie ${CLUSTER_ERLANG_COOKIE}
+
++K true
++A30
+```
+- ${ERLANG_NODENAME} - Erlang node long name ( node@host.domain )
+- ${CLUSTER_ERLANG_COOKIE} - share secret (cookie) among erlang cluster nodes
+```
+[
+  {erlang_k8s_cluster, 
+  [{'k8s.svc.path', ${K8S_HEADLESS_SVC}},
+   {'world.list.verbosity', verbose},
+   {'world.list.interval.ms', 5000},
+   {'dns.wait.ms', 5000},
+   {'world.list', ${WORLD_LIST}}
+]}
+].
+```
+1. Dynamic node cluster configuration specially when horizontal scaling is expected
+- ${K8S_HEADLESS_SVC} - k8s headleass service FQDN
+- ${WORLD_LIST} - []
+
+2. Static  node cluster configuration specially when horizontal scaling is not expected
+- ${K8S_HEADLESS_SVC} - []
+- ${WORLD_LIST} - list of (predefined)fqdn hostnames.
+
 ## Packaging application
 
 ### Create rebar release
