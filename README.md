@@ -1,5 +1,5 @@
 # erlang_k8s_cluster
-Automatic Erlang based cluster creation in k8s.
+Automatic Erlang peer discovery on k8s. This application can be start with your main erlang application with required configuration to established discovery among peer discovery. 
 For more information please refer [Erlang cluster peer discovery on Kubernetes](https://contactchanaka.medium.com/erlang-cluster-peer-discovery-on-kubernetes-aa2ed15663f9)
 
 ## Packaging application
