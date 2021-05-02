@@ -4,8 +4,10 @@ For more information please refer [Erlang cluster peer discovery on Kubernetes](
 
 ## configurations
 
+configuration need to be set as environmental variables.
+
 ```
-# vm.args 
+# vm.args.src 
 -name ${ERLANG_NODENAME} 
 
 -setcookie ${CLUSTER_ERLANG_COOKIE}
@@ -15,7 +17,9 @@ For more information please refer [Erlang cluster peer discovery on Kubernetes](
 ```
 - ${ERLANG_NODENAME} - Erlang node long name ( node@host.domain )
 - ${CLUSTER_ERLANG_COOKIE} - share secret (cookie) among erlang cluster nodes
+
 ```
+# sys.config.src
 [
   {erlang_k8s_cluster, 
   [{'k8s.svc.path', ${K8S_HEADLESS_SVC}},
