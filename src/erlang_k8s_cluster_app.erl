@@ -4,7 +4,7 @@
 %%%-------------------------------------------------------------------
 
 -module(erlang_k8s_cluster_app).
-
+-author('Chanaka Fernando <contactchanaka@gmail.com>').
 -behaviour(application).
 
 -export([start/2, stop/1]).

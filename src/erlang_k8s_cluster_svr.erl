@@ -4,6 +4,7 @@
 %%%-------------------------------------------------------------------
 
 -module(erlang_k8s_cluster_svr).
+-author('Chanaka Fernando <contactchanaka@gmail.com>').
 
 -behaviour(gen_server).
 
