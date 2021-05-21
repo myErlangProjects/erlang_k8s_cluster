@@ -94,5 +94,5 @@ kubectl apply -f erlang-k8s-cluster.yaml
 ```
 Clear out
 ```
-kubectl delete -f erlang-k8s-culster.yaml
+kubectl delete -f erlang-k8s-cluster.yaml
 ```
