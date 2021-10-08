@@ -26,6 +26,7 @@ configuration need to be set as environmental variables.
    {'world.list.verbosity', verbose},
    {'world.list.interval.ms', 5000},
    {'dns.wait.ms', 5000},
+   {'singnal.handler.swap', disable},
    {'world.list', ${WORLD_LIST}}
 ]}
 ].

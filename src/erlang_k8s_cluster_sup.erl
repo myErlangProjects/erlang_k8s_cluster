@@ -34,6 +34,13 @@ init([]) ->
                     {gen_server, start_link,[{local,erlang_k8s_cluster_svr}, erlang_k8s_cluster_svr,[[]],[]]},
                     permanent, 10000, worker, [erlang_k8s_cluster_svr]
                  }],
+    case application:get_env(erlang_k8s_cluster, 'singnal.handler.swap', disable) of
+        enable ->
+            ok = erlang_k8s_cluster_sigterm_handler:start(),
+            error_logger:info_msg("singnal.handler.swap - enable~n");
+        _ ->
+            error_logger:info_msg("singnal.handler.swap - disable~n")
+    end,
     {ok, {SupFlags, ChildSpecs}}.
 
 %% internal functions
