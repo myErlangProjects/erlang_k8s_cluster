@@ -1,4 +1,4 @@
-FROM erlang:21.3.8.22-alpine AS Builder
+FROM erlang:24.1.2.0-alpine AS Builder
 RUN wget https://s3.amazonaws.com/rebar3/rebar3 && chmod +x rebar3 && ./rebar3 local install
 WORKDIR /erlang_k8s_cluster
 COPY rebar.config .
@@ -6,7 +6,7 @@ COPY src src
 COPY config config
 RUN rebar3 release
 
-FROM erlang:21.3.8.22-alpine
+FROM erlang:24.1.2.0-alpine
 RUN mkdir -p /opt/erlang_k8s_cluster/system/
 RUN mkdir -p /opt/erlang_k8s_cluster/logs/
 RUN mkdir -p /opt/erlang_k8s_cluster/logs/backlogs/
